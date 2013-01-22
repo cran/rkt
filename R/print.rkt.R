@@ -8,6 +8,7 @@ cat("\nAnalysis not performed")
 else
 {
 cat("\nStandard model")
+cat("\nTau =",x$tau)
 cat("\nScore = ",x$S)
 cat("\nvar(Score) = ",x$varS)
 cat("\n2-sided p-value = ",x$sl)

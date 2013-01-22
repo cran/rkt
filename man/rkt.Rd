@@ -66,6 +66,8 @@ A list with class rkt is returned with the following components:
 }
  \item{partial.varS.corrected }{partial variance of S, after correction for intra-block correlation, if a covariable is present
 }
+ \item{tau }{Kendall tau 
+}
 
 
 }

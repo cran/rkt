@@ -4,7 +4,7 @@ rkt <- function(date,y,block,cv,correct=F,rep="e"){
 # preparing output
 #
 
-ans<-list(sl=NA,S=NA,B=NA,varS=NA,sl.corrected=NA,varS.corrected=NA,partial.S=NA,partial.sl=NA,partial.varS=NA,partial.sl.corrected=NA,partial.varS.corrected=NA)
+ans<-list(sl=NA,S=NA,B=NA,varS=NA,sl.corrected=NA,varS.corrected=NA,partial.S=NA,partial.sl=NA,partial.varS=NA,partial.sl.corrected=NA,partial.varS.corrected=NA,tau=NA)
 oldClass(ans)<-"rkt"
 
 #
@@ -12,7 +12,7 @@ oldClass(ans)<-"rkt"
 #
 
 if (missing(date)|missing(y)) {
-cat ("Error: first mandatory vector should be postive integer: year or year+fraction\n")
+cat ("Error: first mandatory vector should be positive: year or year+fraction\n")
 cat ("       second mandatory vector should be numerical: measured data (ties allowed)\n")
 cat ("       third optional vector should be positive integer: season, month, site or a unique code for season and site\n")
 cat ("       fourth optional vector should be numerical: covariable\n") 
@@ -23,7 +23,7 @@ if (missing(block)) block<-replicate(length(date),1)
 a<-search()
 ok=0
 if(!is.numeric(date)|!is.numeric(block)|!is.numeric(y)|length(date)<4|length(y)!=length(block)|length(y)!=length(date)|min(date)<0 ) {
-cat ("Error: first mandatory vector should be postive integer: year or year+fraction\n")
+cat ("Error: first mandatory vector should be positive: year or year+fraction\n")
 cat ("       second mandatory vector should be numerical: measured data (ties allowed)\n")
 cat ("       third optional vector should be positive integer: season, month, site or a unique code for season and site\n")
 cat ("       fourth optional vector should be numerical: covariable\n") 
@@ -112,6 +112,7 @@ block[block>=i]<-block[block>=i]-1
 # initializing variables
 #
 
+tau<-NA
 maxblock<-max(block)
 minyear=min(date)
 ny<-max(date)-minyear+1
@@ -164,6 +165,7 @@ varS<-varS+nd*(nd-1)*(2*nd+5)/18-SumTies/18
 } else cat ("1 block with less than 4 points ignored\n")
 }
 B<-median(sen)
+ncomp<-length(sen)
 
 #
 # two equal dates gives delta/0 = Inf or 0/0 = NaN
@@ -313,10 +315,9 @@ p.varSc<-varSc-varmix*varmix/varSccv
 zeta <- (p.S-sign(p.S))/sqrt(p.varSc)
 p.pc <- (1-pnorm(abs(zeta)))*2
 }
-
 }
-
-ans=list(sl=p,S=S,B=B,varS=varS,sl.corrected=pc,varS.corrected=varSc,partial.S=p.S,partial.sl=p.p,partial.varS=p.varS, partial.sl.corrected=p.pc,partial.varS.corrected=p.varSc)
+if (ncomp > 0) tau<-S/ncomp
+ans=list(sl=p,S=S,B=B,varS=varS,sl.corrected=pc,varS.corrected=varSc,partial.S=p.S,partial.sl=p.p,partial.varS=p.varS, partial.sl.corrected=p.pc,partial.varS.corrected=p.varSc,tau=tau)
 oldClass(ans)<-"rkt"
 return(ans)
 
