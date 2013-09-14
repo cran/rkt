@@ -58,18 +58,32 @@ if (correct) date<-trunc(date)
 if (rep=="a"){
 for (i in 1:length(date)){
 date_ties<-y[date==date[i] & block==block[i] & !is.na(y)]
+if (!missing(cv)){
+cv_ties<-cv[date==date[i] & block==block[i] & !is.na(y)]
+}
 if (length(date_ties)>1) {
 y[date==date[i]& block==block[i]]<-NA
 y[i]<-mean(date_ties[!is.na(date_ties)])
+if (!missing(cv)){
+cv[date==date[i]& block==block[i]]<-NA
+cv[i]<-mean(cv_ties[!is.na(date_ties)])
+}
 }
 }
 } 
 if (rep=="m"){
 for (i in 1:length(date)){
 date_ties<-y[date==date[i] & block==block[i] & !is.na(y)]
+if (!missing(cv)){
+cv_ties<-cv[date==date[i] & block==block[i] & !is.na(y)]
+}
 if (length(date_ties)>1) {
 y[date==date[i]& block==block[i]]<-NA
 y[i]<-median(date_ties[!is.na(date_ties)])
+if (!missing(cv)){
+cv[date==date[i]& block==block[i]]<-NA
+cv[i]<-median(cv_ties[!is.na(date_ties)])
+}
 }
 }
 }
