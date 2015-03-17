@@ -3,7 +3,7 @@
 \alias{tkt}
 \docType{package}
 \title{
-Mann-Kendall test, Seasonal and Regional Kendall Tests
+Mann-Kendall Test, Seasonal and Regional Kendall Tests
 }
 \description{
 Contains function rkt which computes the Mann-Kendall test (MK) and the Seasonal and the Regional Kendall Tests for trend (SKT and RKT) and  Theil-Sen's slope estimator. 
@@ -12,8 +12,8 @@ Contains function rkt which computes the Mann-Kendall test (MK) and the Seasonal
 \tabular{ll}{
 Package: \tab rkt\cr
 Type: \tab Package\cr
-Version: \tab 1.3\cr
-Date: \tab 2014-01-22\cr
+Version: \tab 1.4\cr
+Date: \tab 2015-03-17\cr
 License: \tab GPL-2\cr
 }
 This function computes the Mann-Kendall test (MK) and the Seasonal and the Regional Kendall Tests for trend (SKT and RKT) and  Sen's slope estimator.\cr
@@ -42,7 +42,7 @@ Mann H.B. 1945. Nonparametric tests against trend. Econometrica \bold{13}, 245-2
 
 \examples{
 #
-# monthly data
+# monthly data, using covariate and intra-block correction
 #
 data(pie1)
 ex<-rkt(pie1$Year,pie1$SO4,pie1$Month,pie1$mm,TRUE)
@@ -53,5 +53,11 @@ print(ex)
 data(pie1w)
 ex<-rkt(pie1w$Date,pie1w$SO4)
 print(ex)
-
+#
+# monthly data, hydrological years (oct-sep) as in USGS program
+#
+data(pie1)
+ex<-rkt(pie1$Year+floor(pie1$Month/10),pie1$SO4,pie1$Month,,TRUE)
+print(ex)
+#
 }

@@ -72,13 +72,14 @@ A list with class rkt is returned with the following components:
 
 }
 \references{
-Marchetto A., Rogora M., Arisci S. 2013 Trend analysis of atmospheric deposition data: a comparison of statistical approaches. Atmospheric Environment \bold{64}, 95--102\cr\cr
 Helsel D.R., Frans L.M. 2006 The regional Kendall test for trend: Environmental Science and Technology \bold{40}, 4066--4073\cr\cr
 Helsel D.R., Mueller D.K., Slack J.R. 2006 \emph{Computer program for the Kendall family of trend tests} U.S. Geological Survey Scientific Investigations Report 2005-5275, 4 pp.\cr\cr
 Hirsch R.M., Slack J.R., Smith R.A. Techniques of trend ananlyis for monthly water quality data. Water Resources Research \bold{18}, 107-121\cr\cr
 Hirsch R.M., Slack J.R. 1984 A nonparametric test for seasonal data with serial dependance. Water Resources Research \bold{20}, 727-732\cr\cr
 Libiseller C., Grimvall A. 2002 Perfomance of partial Mann-Kendall tests for trend detection in the presence of covariates. Environmetrics \bold{13}, 71-84\cr\cr
 Mann H.B. 1945. Nonparametric tests against trend. Econometrica \bold{13}, 245-249
+Marchetto A., Rogora M., Arisci S. 2013 Trend analysis of atmospheric deposition data: a comparison of statistical approaches. Atmospheric Environment \bold{64}, 95--102\cr\cr
+
 }
 \author{
 Aldo Marchetto <a.marchetto@ise.cnr.it>
@@ -86,8 +87,7 @@ Aldo Marchetto <a.marchetto@ise.cnr.it>
 \note{
 All items are returned in any case. When a test is not performed, relative items are set to NA.\cr
 To consider data sharing the same dates as ties in the time domain, please use Kendall function in the Kendall package.\cr
-For time series with multiple detection limits, please refer to the NADA package.\cr
-To compare with the Kendall.exe program (Helsel  et al. 2004), please use for dates hydrological years (Oct to Sep) instead of calendar years (Jan to Dec). 
+For time series with multiple detection limits, please refer to the NADA package.
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
@@ -105,10 +105,16 @@ print(ex)
 #
 # weekly data, no intrablock correction
 #
+
 data(pie1w)
 ex<-rkt(pie1w$Date,pie1w$SO4)
 print(ex)
-
+#
+# monthly data, hydrological years (oct-sep) as in USGS program
+#
+data(pie1)
+ex<-rkt(pie1$Year+floor(pie1$Month/10),pie1$SO4,pie1$Month,,TRUE)
+print(ex)
 }
 \keyword{ ts }
 \keyword{ nonparametric }

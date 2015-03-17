@@ -287,22 +287,46 @@ pc<-(1-pnorm(abs(zeta)))*2
 #
 
 if (!missing(cv)){
-X<-rep(0,times=(ny*maxblock))
-dim(X)<- c(ny,maxblock)
+XC<-rep(NA,times=(ny*maxblock))
+dim(XC)<- c(ny,maxblock)
 Rks<-X
 varSccv<-0
-for (i in 1:length(date)) X[date[i]-minyear+1,block[i]]<-cv[i]
+for (i in 1:length(date)) XC[date[i]-minyear+1,block[i]]<-cv[i]
 for (i in 1:maxblock){ 
-R<-X[,i]
+R<-XC[,i]
 R<-rank(R,na.last="keep",ties.method="average")
 R[is.na(R)]<-mean(R[!is.na(R)])
 Rks[,i]<-R
 }
+# 
+# recalculating varmix for intrablock variance
+#
+varmix<-0
+for (g in 1:maxblock){
+for (h in 1:maxblock){
+kkcv=XC[,g]
+kky=X[,h]
+Ry<-rank(kky,na.last="keep",ties.method="average")
+Ry[is.na(Ry)]<-mean(Ry[!is.na(Ry)])
+Rcv<-rank(kkcv,na.last="keep",ties.method="average")
+Rcv[is.na(Rcv)]<-mean(Rcv[!is.na(Rcv)])
+Kmix<-0
+for (i in 2:length(kky)) {
+for (j in 1:(i-1)) Kmix<-Kmix+sign1((kkcv[i]-kkcv[j])*(kky[i]-kky[j]))
+}
+Gmix<-0
+for (i in 1:length(kky)) Gmix<-Gmix+Ry[i]*Rcv[i]
+varmix<-varmix+(Kmix+4*Gmix-length(kky)*(length(kky[!is.na(kky)])+1)*(length(kkcv[!is.na(kkcv)])+1))/3
+}
+}
+#
+#
+#
 for (g in 1:maxblock) {
 for (h in 1:maxblock){
 K<-0
 for (i in 2:ny) {
-for (j in 1:(i-1)) K<-K+sign1((X[j,g]-X[i,g])*(X[j,h]-X[i,h]))
+for (j in 1:(i-1)) K<-K+sign1((XC[j,g]-XC[i,g])*(XC[j,h]-XC[i,h]))
 }
 G<-0
 for (i in 1:ny) G<-G+Rks[i,g]*Rks[i,h] 

@@ -28,6 +28,7 @@ Aldo Marchetto <a.marchetto@ise.cnr.it>
 
 \examples{
 data(pie1)
+
 ex<-rkt(pie1$Year,pie1$SO4,pie1$Month,pie1$mm,TRUE)
 print(ex)
 }
