@@ -12,8 +12,8 @@ Contains function rkt which computes the Mann-Kendall test (MK) and the Seasonal
 \tabular{ll}{
 Package: \tab rkt\cr
 Type: \tab Package\cr
-Version: \tab 1.4\cr
-Date: \tab 2015-03-17\cr
+Version: \tab 1.5\cr
+Date: \tab 2016-03-07\cr
 License: \tab GPL-2\cr
 }
 This function computes the Mann-Kendall test (MK) and the Seasonal and the Regional Kendall Tests for trend (SKT and RKT) and  Sen's slope estimator.\cr

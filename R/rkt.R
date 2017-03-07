@@ -52,6 +52,20 @@ block<-trunc(block)
 if (correct) date<-trunc(date)
 
 #
+# if correction for covariable requested,
+# eliminating records with missing values for cv 
+# from date,block,y  
+# (version 1.5)
+#
+
+if (!missing(cv)) {
+date=date[!is.na(cv)]
+block=block[!is.na(cv)]
+cv=cv[!is.na(cv)]
+y=y[!is.na(cv)]
+}
+
+#
 # replacing values sharing the same date with median or average
 #
 
