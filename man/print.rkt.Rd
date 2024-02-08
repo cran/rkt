@@ -22,7 +22,7 @@ any additional argument
 NULL
 }
 \author{
-Aldo Marchetto <a.marchetto@ise.cnr.it>
+Aldo Marchetto <aldo.marchetto@cnr.it>
 }
 
 

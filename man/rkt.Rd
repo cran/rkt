@@ -24,7 +24,7 @@ a mandatory vector of measured data. In this vector, missing data are allowed.
 an optional vector of positive integer numbers representing blocks, i.e. sites, seasons or months, or a code combining both sites and seasons/months. If no blocks are defined, the result will be the Mann-Kendall test.
 }
   \item{cv}{
-an optional vector containing a covariable, such as river flow or deposition amount. In this vector, missing data are allowed, however all case for which covariable value is missing are deleted from the analysis. As a consequence, if a covariable with missing data is passed to this function, the Kendall score, tau and p-value will be different than without covariable.
+an optional vector containing a covariable, such as river flow or deposition amount. In this vector, missing data are allowed
 }
   \item{correct}{
 a boolean value. If correct is FALSE, no correction for correlation between blocks is performed. If correct is TRUE, dates are truncated and the correction for correlation between blocks is performed. Note that the truncation is performed in any case, while the correction is performed only if there are more than one block, and more than nine years of data. Default value is FALSE.	
@@ -78,17 +78,16 @@ Hirsch R.M., Slack J.R., Smith R.A. Techniques of trend ananlyis for monthly wat
 Hirsch R.M., Slack J.R. 1984 A nonparametric test for seasonal data with serial dependance. Water Resources Research \bold{20}, 727-732\cr\cr
 Libiseller C., Grimvall A. 2002 Perfomance of partial Mann-Kendall tests for trend detection in the presence of covariates. Environmetrics \bold{13}, 71-84\cr\cr
 Mann H.B. 1945. Nonparametric tests against trend. Econometrica \bold{13}, 245-249
-Marchetto A., Rogora M., Arisci S. 2013 Trend analysis of atmospheric deposition data: a comparison of statistical approaches. Atmospheric Environment \bold{64}, 95-102\cr\cr
+Marchetto A., Rogora M., Arisci S. 2013 Trend analysis of atmospheric deposition data: a comparison of statistical approaches. Atmospheric Environment \bold{64}, 95--102\cr\cr
 
 }
 \author{
-Aldo Marchetto <a.marchetto@ise.cnr.it>
+Aldo Marchetto <aldo.marchetto@cnr.it>
 }
 \note{
 All items are returned in any case. When a test is not performed, relative items are set to NA.\cr
 To consider data sharing the same dates as ties in the time domain, please use Kendall function in the Kendall package.\cr
-For time series with multiple detection limits, please refer to the NADA package.\cr
-Thanks to Peter Waldner (WSL, Switzerland) and Claudia von Bromssen (SLU, Sweden) for their contribution. 
+For time series with multiple detection limits, please refer to the NADA package.
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~

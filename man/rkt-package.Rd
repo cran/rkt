@@ -1,6 +1,5 @@
 \name{rkt-package}
-\alias{tkt-package}
-\alias{tkt}
+\alias{rkt-package}
 \docType{package}
 \title{
 Mann-Kendall Test, Seasonal and Regional Kendall Tests
@@ -12,8 +11,8 @@ Contains function rkt which computes the Mann-Kendall test (MK) and the Seasonal
 \tabular{ll}{
 Package: \tab rkt\cr
 Type: \tab Package\cr
-Version: \tab 1.6\cr
-Date: \tab 2021-03-23\cr
+Version: \tab 1.7\cr
+Date: \tab 2024-02-07\cr
 License: \tab GPL-2\cr
 }
 This function computes the Mann-Kendall test (MK) and the Seasonal and the Regional Kendall Tests for trend (SKT and RKT) and  Sen's slope estimator.\cr
@@ -24,7 +23,7 @@ When a covariable is defined, this function also computes partial RKT and SKT. \
 To allow for non-regular sampling dates, input data should be vectors, not time series.
 }
 \author{
-Maintainer: Aldo Marchetto <aldo.marchetto@nr.it>
+Maintainer: Aldo Marchetto <aldo.marchetto@cnr.it>
 
 }
 \references{
